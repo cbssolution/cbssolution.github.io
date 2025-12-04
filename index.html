@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIRBNB ELITE - De Propriedade Comum a Império Digital</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --obsidian: #0a0a0a;
+            --charcoal: #1a1a1a;
+            --graphite: #2a2a2a;
+            --platinum: #e8e8e8;
+            --gold: #d4af37;
+            --gold-light: #f2d574;
+            --gold-dark: #b8941f;
+            --accent-red: #ff4757;
+            --accent-green: #2ed573;
+            --accent-blue: #3742fa;
+            --white: #ffffff;
+            --shadow-intense: 0 25px 50px rgba(0,0,0,0.8);
+            --glow-gold: 0 0 40px rgba(212,175,55,0.6);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--obsidian);
+            color: var(--white);
+            line-height: 1.6;
+            overflow-x: hidden;
+            cursor: none;
+        }
+
+        /* Custom Cursor */
+        .cursor {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--gold);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: all 0.1s ease;
+            transform: translate(-50%, -50%);
+        }
+
+        .cursor-follower {
+            width: 8px;
+            height: 8px;
+            background: var(--gold);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9998;
+            transition: all 0.3s ease;
+            transform: translate(-50%, -50%);
+        }
+
+        /* Particle Background */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: var(--gold);
+            border-radius: 50%;
+            opacity: 0.1;
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.1; }
+            90% { opacity: 0.1; }
+            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+        }
+
+        /* Hero Section - Ultra Premium */
+        .hero {
+            min-height: 100vh;
+            position: relative;
+            background: linear-gradient(135deg, 
+                var(--obsidian) 0%, 
+                var(--charcoal) 25%,
+                #1a0f0a 50%,
+                var(--charcoal) 75%,
+                var(--obsidian) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+            z-index: 2;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(212,175,55,0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(212,175,55,0.1) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(255,71,87,0.05) 0%, transparent 50%);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            max-width: 1200px;
+            padding: 0 20px;
+            animation: heroFadeIn 2s ease-out;
+        }
+
+        @keyframes heroFadeIn {
+            0% { opacity: 0; transform: translateY(50px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(45deg, var(--accent-red), #ff6b7a);
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+            box-shadow: var(--glow-gold);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, 
+                var(--white) 0%, 
+                var(--gold-light) 25%,
+                var(--gold) 50%,
+                var(--gold-light) 75%,
+                var(--white) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 50px rgba(212,175,55,0.3);
+            animation: titleGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes titleGlow {
+            0% { filter: brightness(1); }
+            100% { filter: brightness(1.2); }
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            font-weight: 400;
+            margin-bottom: 50px;
+            color: var(--platinum);
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0;
+            animation: subtitleFadeIn 2s ease-out 0.5s forwards;
+        }
+
+        @keyframes subtitleFadeIn {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* CTA Button Ultra Premium */
+        .cta-mega {
+            position: relative;
+            display: inline-block;
+            padding: 25px 60px;
+            font-size: 1.4rem;
+            font-weight: 800;
+            text-decoration: none;
+            color: var(--obsidian);
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+            border-radius: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 
+                var(--shadow-intense),
+                inset 0 1px 0 rgba(255,255,255,0.2);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            margin-top: 30px;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .cta-mega::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.8s;
+            z-index: -1;
+        }
+
+        .cta-mega:hover {
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: 
+                0 30px 60px rgba(212,175,55,0.6),
+                inset 0 1px 0 rgba(255,255,255,0.3);
+        }
+
+        .cta-mega:hover::before {
+            left: 100%;
+        }
+
+        /* Problem Section - Enhanced */
+        .problem-section {
+            padding: 120px 0;
+            background: linear-gradient(180deg, var(--obsidian), var(--charcoal));
+            position: relative;
+            z-index: 2;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 80px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .section-title.pain {
+            color: var(--accent-red);
+            text-shadow: 0 0 30px rgba(255,71,87,0.5);
+        }
+
+        .section-title.solution {
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .problem-card {
+            background: linear-gradient(145deg, var(--graphite), var(--charcoal));
+            padding: 50px;
+            border-radius: 20px;
+            border-left: 5px solid var(--accent-red);
+            position: relative;
+            transition: all 0.4s ease;
+            box-shadow: var(--shadow-intense);
+            overflow: hidden;
+        }
+
+        .problem-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255,71,87,0.1), transparent 50%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .problem-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 30px 60px rgba(255,71,87,0.3);
+        }
+
+        .problem-card:hover::before {
+            opacity: 1;
+        }
+
+        .problem-icon {
+            font-size: 3.5rem;
+            margin-bottom: 25px;
+            color: var(--accent-red);
+            display: block;
+            text-align: center;
+        }
+
+        .problem-card h3 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--white);
+            text-align: center;
+        }
+
+        .problem-card p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--platinum);
+            text-align: center;
+        }
+
+        /* Solution Section - Revolutionary */
+        .solution-section {
+            padding: 120px 0;
+            background: 
+                linear-gradient(45deg, var(--charcoal) 0%, var(--obsidian) 50%, var(--charcoal) 100%),
+                url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h100v100H0z' fill='%230a0a0a'/%3E%3Cpath d='M10 10h80v80H10z' fill='none' stroke='%23d4af37' stroke-width='0.1' opacity='0.3'/%3E%3C/svg%3E");
+            position: relative;
+            z-index: 2;
+        }
+
+        .solution-intro {
+            text-align: center;
+            max-width: 1000px;
+            margin: 0 auto 80px;
+        }
+
+        .solution-intro p {
+            font-size: 1.4rem;
+            line-height: 1.8;
+            color: var(--platinum);
+            margin-bottom: 30px;
+        }
+
+        .solution-highlight {
+            color: var(--gold);
+            font-weight: 700;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 80px;
+        }
+
+        .benefit-card {
+            background: linear-gradient(145deg, 
+                rgba(212,175,55,0.15), 
+                rgba(212,175,55,0.05));
+            padding: 50px;
+            border-radius: 20px;
+            border: 1px solid rgba(212,175,55,0.3);
+            text-align: center;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .benefit-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(212,175,55,0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: all 0.4s ease;
+            transform: scale(0);
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-20px) scale(1.05);
+            box-shadow: 0 25px 50px rgba(212,175,55,0.4);
+        }
+
+        .benefit-card:hover::before {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .benefit-icon {
+            font-size: 4rem;
+            margin-bottom: 30px;
+            color: var(--gold);
+            filter: drop-shadow(0 0 20px rgba(212,175,55,0.6));
+        }
+
+        .benefit-card h3 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--gold);
+        }
+
+        .benefit-card p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: var(--platinum);
+        }
+
+        /* Authority Section */
+        .authority-section {
+            padding: 120px 0;
+            background: var(--charcoal);
+            position: relative;
+            z-index: 2;
+        }
+
+        .authority-content {
+            text-align: center;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .authority-text {
+            font-size: 1.4rem;
+            line-height: 1.8;
+            margin-bottom: 60px;
+            color: var(--platinum);
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-top: 80px;
+        }
+
+        .stat-card {
+            background: linear-gradient(145deg, var(--obsidian), var(--graphite));
+            padding: 50px 30px;
+            border-radius: 15px;
+            text-align: center;
+            border-top: 3px solid var(--gold);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(212,175,55,0.1), transparent);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(212,175,55,0.3);
+        }
+
+        .stat-card:hover::before {
+            opacity: 1;
+        }
+
+        .stat-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: var(--gold);
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            color: var(--platinum);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Offer Section - Ultra Premium */
+        .offer-section {
+            padding: 120px 0;
+            background: linear-gradient(135deg, var(--obsidian), var(--charcoal), var(--obsidian));
+            position: relative;
+            z-index: 2;
+        }
+
+        .offer-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 60px;
+            margin-top: 80px;
+            align-items: start;
+        }
+
+        .offer-card {
+            background: linear-gradient(145deg, var(--graphite), var(--charcoal));
+            border-radius: 25px;
+            padding: 60px;
+            position: relative;
+            transition: all 0.4s ease;
+            border: 2px solid transparent;
+            overflow: hidden;
+        }
+
+        .offer-card.premium {
+            background: linear-gradient(145deg, var(--charcoal), var(--obsidian));
+            border: 3px solid var(--gold);
+            transform: scale(1.05);
+            position: relative;
+            z-index: 3;
+        }
+
+        .offer-card.premium::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(212,175,55,0.1), transparent 50%);
+            z-index: -1;
+        }
+
+        .premium-badge {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            color: var(--obsidian);
+            padding: 15px 35px;
+            border-radius: 25px;
+            font-weight: 900;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: var(--glow-gold);
+            z-index: 4;
+        }
+
+        .offer-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .offer-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+            color: var(--white);
+        }
+
+        .offer-card.premium .offer-title {
+            color: var(--gold);
+        }
+
+        .price-container {
+            text-align: center;
+            margin: 40px 0;
+            padding: 30px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 15px;
+            position: relative;
+        }
+
+        .old-price {
+            font-size: 1.8rem;
+            color: var(--accent-red);
+            text-decoration: line-through;
+            margin-bottom: 10px;
+            opacity: 0.7;
+        }
+
+        .current-price {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 900;
+            color: var(--white);
+            margin-bottom: 10px;
+        }
+
+        .offer-card.premium .current-price {
+            color: var(--gold);
+            font-size: 4.5rem;
+            text-shadow: var(--glow-gold);
+        }
+
+        .payment-terms {
+            font-size: 1rem;
+            color: var(--platinum);
+            opacity: 0.8;
+        }
+
+        .features-list {
+            list-style: none;
+            margin: 40px 0;
+        }
+
+        .features-list li {
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            position: relative;
+            padding-left: 40px;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .features-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--accent-green);
+            font-weight: 900;
+            font-size: 1.3rem;
+        }
+
+        .offer-card.premium .features-list li::before {
+            content: '★';
+            color: var(--gold);
+        }
+
+        .offer-button {
+            display: block;
+            width: 100%;
+            padding: 25px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-decoration: none;
+            color: var(--white);
+            background: linear-gradient(135deg, var(--accent-blue), #4834d4);
+            border-radius: 15px;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.4s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .offer-card.premium .offer-button {
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            color: var(--obsidian);
+            box-shadow: var(--glow-gold);
+        }
+
+        .offer-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+        }
+
+        /* Responsivo */
+        @media (max-width: 768px) {
+            body { cursor: auto; }
+            .cursor, .cursor-follower { display: none; }
+            
+            .hero-content { padding: 0 15px; }
+            .container { padding: 0 15px; }
+            
+            .problem-grid { grid-template-columns: 1fr; gap: 30px; }
+            .benefits-grid { grid-template-columns: 1fr; gap: 30px; }
+            .stats-container { grid-template-columns: 1fr; gap: 30px; }
+            .offer-grid { grid-template-columns: 1fr; gap: 40px; }
+            
+            .offer-card.premium { transform: none; }
+            .problem-card { padding: 30px; }
+            .benefit-card { padding: 30px; }
+            .offer-card { padding: 40px; }
+            
+            .section-title { font-size: 2.5rem; }
+        }
+
+/* Logo Leão — coloca no topo, centralizada e com animação */
+.logo-leao {
+    width: 180px;      /* você pode alterar esse valor para deixar maior/menor */
+    height: auto;
+    display: block;
+    margin: 0 auto 28px auto; /* centraliza e dá espaço embaixo */
+    filter: drop-shadow(0 0 25px rgba(212,175,55,0.35));
+    opacity: 0;
+    animation: logoFade 1.6s ease-out forwards;
+}
+
+@keyframes logoFade {
+    0%   { opacity: 0; transform: translateY(-20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+    </style>
+</head>
+<body>
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <!-- Particles Background -->
+    <div class="particles"></div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <img src="leao.png" alt="Logo Leão" class="logo-leao">
+            <div class="status-badge">Oferta Exclusiva • Últimas Vagas</div>
+            <h1>AIRBNB ELITE</h1>
+            <p class="hero-subtitle">Transforme seu imóvel comum em máquina de renda nacional e internacional. Saia do aluguel tradicional, cheio de dores de cabeça, e entre no mundo onde cada reserva é pagamento antecipado e hóspedes que valorizam sua propriedade.</p>
+            <a href="#oferta" class="cta-mega">Quero Entrar Agora</a>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="problem-section">
+        <div class="container">
+            <h2 class="section-title pain">Chega de Dor de Cabeça</h2>
+            
+            <div class="problem-grid">
+                <div class="problem-card">
+                    <div class="problem-icon">💸</div>
+                    <h3>Inquilinos que atrasam</h3>
+                    <p>Cansado de esperar aluguel cair na conta? No Airbnb e Booking, o pagamento entra antes mesmo do hóspede chegar.</p>
+                </div>
+
+                <div class="problem-card">
+                    <div class="problem-icon">🔑</div>
+                    <h3>Imóvel mal cuidado</h3>
+                    <p>Deixar nas mãos erradas significa prejuízo. Com hóspedes temporários, seu imóvel é usado, mas preservado.</p>
+                </div>
+
+                <div class="problem-card">
+                    <div class="problem-icon">⏳</div>
+                    <h3>Meses de contrato</h3>
+                    <p>Travar sua propriedade em contratos longos limita sua liberdade. Aqui você escolhe quando e quanto cobrar.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Section -->
+    <section class="solution-section">
+        <div class="container">
+            <h2 class="section-title solution">A Virada de Chave</h2>
+            
+            <div class="solution-intro">
+                <p>Você não precisa ser especialista. Com o <span class="solution-highlight">Guia Airbnb Elite</span>, qualquer proprietário consegue migrar do aluguel tradicional para o digital e começar a lucrar em dólar, recebendo por cada diária, sem complicação.</p>
+                
+                <p>Esqueça contratos, inquilinos problemáticos e atrasos. É hora de assumir o controle e transformar seu imóvel em um ativo rentável de verdade.</p>
+            </div>
+
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">🚀</div>
+                    <h3>Renda Acelerada</h3>
+                    <p>Cobrança diária, pagamentos antecipados e liberdade total de calendário.</p>
+                </div>
+
+                <div class="benefit-card">
+                    <div class="benefit-icon">🌎</div>
+                    <h3>Mercado Global</h3>
+                    <p>Seu anúncio visível no mundo todo, atraindo hóspedes locais e estrangeiros.</p>
+                </div>
+
+                <div class="benefit-card">
+                    <div class="benefit-icon">🛡️</div>
+                    <h3>Segurança</h3>
+                    <p>Proteção das plataformas contra calotes e hóspedes de má-fé.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Authority Section -->
+    <section class="authority-section">
+        <div class="container">
+            <div class="authority-content">
+                <h2 class="section-title">Não é Teoria. É Estratégia.</h2>
+                
+                <p class="authority-text">O Guia Airbnb Elite foi desenhado especificamente para quem nunca anunciou online. Nós mostramos passo a passo como transformar sua propriedade em fonte de renda sólida — sem complicações, sem enrolação, direto ao ponto.</p>
+
+                <div class="stats-container">
+                    <div class="stat-card">
+                        <div class="stat-number">+300%</div>
+                        <div class="stat-label">Potencial de ganho frente ao aluguel tradicional</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-number">0</div>
+                        <div class="stat-label">Meses de espera para receber</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-number">100%</div>
+                        <div class="stat-label">Controle do calendário e preço</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Offer Section -->
+    <section class="offer-section" id="oferta">
+        <div class="container">
+            <h2 class="section-title solution">Escolha Seu Caminho</h2>
+            
+            <div class="offer-grid">
+                <!-- Guia Airbnb Elite -->
+                <div class="offer-card">
+                    <div class="offer-header">
+                        <h3 class="offer-title">Guia Airbnb Elite</h3>
+                    </div>
+
+                    <div class="price-container">
+                        <div class="current-price">R$ 59,90</div>
+                        <div class="payment-terms">Acesso imediato</div>
+                    </div>
+
+                    <ul class="features-list">
+                        <li>Passo a passo para criar anúncios poderosos</li>
+                        <li>Como precificar de forma estratégica</li>
+                        <li>Checklist para seu primeiro hóspede</li>
+                        <li>Bônus: como atrair hóspedes internacionais</li>
+                    </ul>
+
+                    <a href="#" class="offer-button">Quero o Guia</a>
+                </div>
+
+                <!-- Pacote Premium -->
+                <div class="offer-card premium">
+                    <div class="premium-badge">Mais Vendido</div>
+                    
+                    <div class="offer-header">
+                        <h3 class="offer-title">Pacote Premium</h3>
+                    </div>
+
+                    <div class="price-container">
+                        <div class="old-price">De R$ 699,90</div>
+                        <div class="current-price">R$ 209,90</div>
+                        <div class="payment-terms">Consultoria personalizada incluída</div>
+                    </div>
+
+                    <ul class="features-list">
+                        <li>Tudo do Guia Airbnb Elite</li>
+                        <li>Análise do seu imóvel e mercado local</li>
+                        <li>Definição do valor ideal por diária</li>
+                        <li>Título e descrição prontos para o anúncio</li>
+                        <li>Suporte dedicado para ajustes iniciais</li>
+                    </ul>
+
+                    <a href="#" class="offer-button">Quero o Premium</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Custom Cursor
+        const cursor = document.querySelector('.cursor');
+        const cursorFollower = document.querySelector('.cursor-follower');
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            
+            setTimeout(() => {
+                cursorFollower.style.left = e.clientX + 'px';
+                cursorFollower.style.top = e.clientY + 'px';
+            }, 100);
+        });
+
+        // Hover effects for cursor
+        const interactiveElements = document.querySelectorAll('a, button, .problem-card, .benefit-card, .stat-card, .offer-card');
+
+        interactiveElements.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.style.transform = 'translate(-50%, -50%) scale(1.5)';
+                cursorFollower.style.transform = 'translate(-50%, -50%) scale(2)';
+            });
+
+            el.addEventListener('mouseleave', () => {
+                cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+                cursorFollower.style.transform = 'translate(-50%, -50%) scale(1)';
+            });
+        });
+
+        // Particles
+        function createParticles() {
+            const particlesContainer = document.querySelector('.particles');
+            const particleCount = 50;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        createParticles();
+
+        // Smooth scroll for CTA buttons
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all cards and sections
+        const animatedElements = document.querySelectorAll('.problem-card, .benefit-card, .stat-card, .offer-card');
+        animatedElements.forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(50px)';
+            el.style.transition = 'all 0.8s ease';
+            observer.observe(el);
+        });
+
+        // Stats counter animation
+        function animateStats() {
+            const statNumbers = document.querySelectorAll('.stat-number');
+            
+            statNumbers.forEach(stat => {
+                const finalValue = stat.textContent;
+                const isPercentage = finalValue.includes('%');
+                const isPlus = finalValue.includes('+');
+                const numericValue = parseInt(finalValue.replace(/[^0-9]/g, ''));
+                
+                if (numericValue > 0) {
+                    let current = 0;
+                    const increment = numericValue / 50;
+                    const timer = setInterval(() => {
+                        current += increment;
+                        if (current >= numericValue) {
+                            current = numericValue;
+                            clearInterval(timer);
+                        }
+                        
+                        let displayValue = Math.floor(current).toString();
+                        if (isPlus) displayValue = '+' + displayValue;
+                        if (isPercentage) displayValue += '%';
+                        
+                        stat.textContent = displayValue;
+                    }, 50);
+                }
+            });
+        }
+
+        // Trigger stats animation when section is visible
+        const statsSection = document.querySelector('.authority-section');
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateStats();
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        statsObserver.observe(statsSection);
+    </script>
+</body>
+</html>
