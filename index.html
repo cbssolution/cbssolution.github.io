@@ -338,6 +338,163 @@
             text-align: center;
         }
 
+        /* Calculator Section - NEW */
+        .calculator-section {
+            padding: 120px 0;
+            background: 
+                linear-gradient(135deg, var(--charcoal) 0%, var(--obsidian) 50%, var(--charcoal) 100%),
+                url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h100v100H0z' fill='%230a0a0a'/%3E%3Cpath d='M10 10h80v80H10z' fill='none' stroke='%23d4af37' stroke-width='0.1' opacity='0.3'/%3E%3C/svg%3E");
+            position: relative;
+            z-index: 2;
+            border-top: 1px solid rgba(212,175,55,0.2);
+            border-bottom: 1px solid rgba(212,175,55,0.2);
+        }
+
+        .calculator-intro {
+            text-align: center;
+            max-width: 1000px;
+            margin: 0 auto 60px;
+        }
+
+        .calculator-intro p {
+            font-size: 1.4rem;
+            line-height: 1.8;
+            color: var(--platinum);
+            margin-bottom: 30px;
+        }
+
+        .calculator-highlight {
+            color: var(--gold);
+            font-weight: 700;
+        }
+
+        .calculator-cta-box {
+            background: linear-gradient(145deg, 
+                rgba(212,175,55,0.15), 
+                rgba(212,175,55,0.05));
+            padding: 60px;
+            border-radius: 25px;
+            border: 2px solid rgba(212,175,55,0.3);
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .calculator-cta-box::before {
+            content: '🧮';
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            font-size: 8rem;
+            opacity: 0.1;
+            transform: rotate(15deg);
+        }
+
+        .calculator-cta-box h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+            color: var(--gold);
+        }
+
+        .calculator-cta-box p {
+            font-size: 1.2rem;
+            line-height: 1.7;
+            color: var(--platinum);
+            margin-bottom: 40px;
+        }
+
+        .calculator-button {
+            position: relative;
+            display: inline-block;
+            padding: 22px 55px;
+            font-size: 1.3rem;
+            font-weight: 800;
+            text-decoration: none;
+            color: var(--obsidian);
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+            border-radius: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 
+                var(--shadow-intense),
+                inset 0 1px 0 rgba(255,255,255,0.2);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .calculator-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.8s;
+            z-index: -1;
+        }
+
+        .calculator-button:hover {
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: 
+                0 30px 60px rgba(212,175,55,0.6),
+                inset 0 1px 0 rgba(255,255,255,0.3);
+        }
+
+        .calculator-button:hover::before {
+            left: 100%;
+        }
+
+        .calculator-benefits {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .calc-benefit-item {
+            background: rgba(15,23,42,0.4);
+            border: 1px solid rgba(212,175,55,0.2);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .calc-benefit-item:hover {
+            transform: translateY(-5px);
+            border-color: rgba(212,175,55,0.5);
+            box-shadow: 0 10px 30px rgba(212,175,55,0.2);
+        }
+
+        .calc-benefit-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .calc-benefit-item h4 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--gold);
+        }
+
+        .calc-benefit-item p {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
         /* Solution Section - Revolutionary */
         .solution-section {
             padding: 120px 0;
@@ -692,30 +849,32 @@
             .benefits-grid { grid-template-columns: 1fr; gap: 30px; }
             .stats-container { grid-template-columns: 1fr; gap: 30px; }
             .offer-grid { grid-template-columns: 1fr; gap: 40px; }
+            .calculator-benefits { grid-template-columns: 1fr; gap: 20px; }
             
             .offer-card.premium { transform: none; }
             .problem-card { padding: 30px; }
             .benefit-card { padding: 30px; }
             .offer-card { padding: 40px; }
+            .calculator-cta-box { padding: 40px 30px; }
             
             .section-title { font-size: 2.5rem; }
         }
 
-/* Logo Leão — coloca no topo, centralizada e com animação */
-.logo-leao {
-    width: 180px;      /* você pode alterar esse valor para deixar maior/menor */
-    height: auto;
-    display: block;
-    margin: 0 auto 28px auto; /* centraliza e dá espaço embaixo */
-    filter: drop-shadow(0 0 25px rgba(212,175,55,0.35));
-    opacity: 0;
-    animation: logoFade 1.6s ease-out forwards;
-}
+        /* Logo Leão — coloca no topo, centralizada e com animação */
+        .logo-leao {
+            width: 180px;
+            height: auto;
+            display: block;
+            margin: 0 auto 28px auto;
+            filter: drop-shadow(0 0 25px rgba(212,175,55,0.35));
+            opacity: 0;
+            animation: logoFade 1.6s ease-out forwards;
+        }
 
-@keyframes logoFade {
-    0%   { opacity: 0; transform: translateY(-20px); }
-    100% { opacity: 1; transform: translateY(0); }
-}
+        @keyframes logoFade {
+            0%   { opacity: 0; transform: translateY(-20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
 <body>
@@ -759,6 +918,44 @@
                     <div class="problem-icon">⏳</div>
                     <h3>Meses de contrato</h3>
                     <p>Travar sua propriedade em contratos longos limita sua liberdade. Aqui você escolhe quando e quanto cobrar.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Calculator Section - NEW -->
+    <section class="calculator-section">
+        <div class="container">
+            <h2 class="section-title solution">Descubra Seu Potencial Real</h2>
+            
+            <div class="calculator-intro">
+                <p>Antes de continuar, que tal <span class="calculator-highlight">ver com seus próprios olhos</span> quanto você pode ganhar a mais com seu imóvel?</p>
+                <p>Nossa calculadora profissional compara o aluguel tradicional com hospedagem de curta duração e mostra o potencial real do seu imóvel com dados precisos.</p>
+            </div>
+
+            <div class="calculator-cta-box">
+                <h3>Calculadora de Potencial Airbnb</h3>
+                <p>Compare o rendimento do aluguel tradicional com hospedagem de curta duração em 2 minutos. Totalmente gratuito e sem cadastro.</p>
+                <a href="calculadora.html" class="calculator-button">🧮 Calcular Agora</a>
+            </div>
+
+            <div class="calculator-benefits">
+                <div class="calc-benefit-item">
+                    <span class="calc-benefit-icon">📊</span>
+                    <h4>Cálculo Preciso</h4>
+                    <p>Baseado em dados reais do mercado</p>
+                </div>
+
+                <div class="calc-benefit-item">
+                    <span class="calc-benefit-icon">⚡</span>
+                    <h4>Resultado Instantâneo</h4>
+                    <p>Descubra em menos de 2 minutos</p>
+                </div>
+
+                <div class="calc-benefit-item">
+                    <span class="calc-benefit-icon">🎯</span>
+                    <h4>100% Gratuito</h4>
+                    <p>Sem necessidade de cadastro</p>
                 </div>
             </div>
         </div>
@@ -896,7 +1093,7 @@
         });
 
         // Hover effects for cursor
-        const interactiveElements = document.querySelectorAll('a, button, .problem-card, .benefit-card, .stat-card, .offer-card');
+        const interactiveElements = document.querySelectorAll('a, button, .problem-card, .benefit-card, .stat-card, .offer-card, .calc-benefit-item, .calculator-cta-box');
 
         interactiveElements.forEach(el => {
             el.addEventListener('mouseenter', () => {
@@ -957,7 +1154,7 @@
         }, observerOptions);
 
         // Observe all cards and sections
-        const animatedElements = document.querySelectorAll('.problem-card, .benefit-card, .stat-card, .offer-card');
+        const animatedElements = document.querySelectorAll('.problem-card, .benefit-card, .stat-card, .offer-card, .calc-benefit-item');
         animatedElements.forEach(el => {
             el.style.opacity = '0';
             el.style.transform = 'translateY(50px)';
