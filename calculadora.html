@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Máquina de Lucro - Calculadora Profissional</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg-dark:#0a0e1a;
+  --bg-card:#131829;
+  --bg-card-hover:#1a2035;
+  --border:#2a3449;
+  --text-primary:#f8fafc;
+  --text-secondary:#94a3b8;
+  --text-muted:#64748b;
+  --accent-primary:#3b82f6;
+  --accent-secondary:#8b5cf6;
+  --success:#10b981;
+  --danger:#ef4444;
+  --warning:#f59e0b;
+  --highlight-glow:rgba(59,130,246,0.15);
+}
+body{
+  background:var(--bg-dark);
+  background-image:
+    radial-gradient(circle at 20% 20%,rgba(59,130,246,0.08),transparent 50%),
+    radial-gradient(circle at 80% 80%,rgba(139,92,246,0.06),transparent 50%);
+  background-attachment:fixed;
+  min-height:100vh;
+  color:var(--text-primary);
+  font-family:'Space Grotesk',system-ui,sans-serif;
+  padding:20px;
+  line-height:1.6;
+}
+.container{max-width:1400px;margin:0 auto}
+.header{
+  background:var(--bg-card);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:48px 40px;
+  margin-bottom:32px;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+.header::before{
+  content:'';
+  position:absolute;
+  top:-50%;
+  left:-50%;
+  width:200%;
+  height:200%;
+  background:radial-gradient(circle,var(--highlight-glow),transparent 50%);
+  opacity:0.5;
+  animation:pulse 8s ease-in-out infinite;
+}
+@keyframes pulse{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.1)}
+}
+.header-content{position:relative;z-index:1}
+.badge{
+  background:linear-gradient(135deg,rgba(59,130,246,0.2),rgba(139,92,246,0.2));
+  border:1px solid rgba(59,130,246,0.4);
+  color:#60a5fa;
+  padding:10px 24px;
+  border-radius:24px;
+  font-size:0.875rem;
+  font-weight:600;
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  margin-bottom:20px;
+  animation:fadeInDown 0.6s ease-out;
+}
+@keyframes fadeInDown{
+  from{opacity:0;transform:translateY(-20px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.header h1{
+  font-family:'Playfair Display',serif;
+  font-size:2.75rem;
+  margin-bottom:16px;
+  background:linear-gradient(135deg,#f8fafc,#94a3b8);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+  animation:fadeIn 0.8s ease-out 0.2s both;
+}
+@keyframes fadeIn{
+  from{opacity:0}
+  to{opacity:1}
+}
+.header p{
+  font-size:1.125rem;
+  color:var(--text-secondary);
+  margin-bottom:32px;
+  max-width:700px;
+  margin-left:auto;
+  margin-right:auto;
+  animation:fadeIn 0.8s ease-out 0.4s both;
+}
+.trust-bar{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:40px;
+  flex-wrap:wrap;
+  padding:24px;
+  background:rgba(15,23,42,0.4);
+  border-radius:12px;
+  border:1px solid var(--border);
+  animation:fadeIn 0.8s ease-out 0.6s both;
+}
+.trust-item{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-size:0.9rem;
+  color:var(--text-secondary);
+  font-weight:500;
+}
+.trust-item::before{
+  content:"✓";
+  color:var(--success);
+  font-weight:700;
+  font-size:1.3rem;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:28px;
+  height:28px;
+  background:rgba(16,185,129,0.1);
+  border-radius:50%;
+}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(500px,1fr));
+  gap:24px;
+  margin-bottom:24px;
+}
+.card{
+  background:var(--bg-card);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:36px;
+  transition:all 0.3s ease;
+  animation:slideUp 0.6s ease-out both;
+}
+@keyframes slideUp{
+  from{opacity:0;transform:translateY(30px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.card:hover{
+  border-color:rgba(59,130,246,0.5);
+  box-shadow:0 8px 32px rgba(59,130,246,0.1);
+  transform:translateY(-2px);
+}
+.card h3{
+  font-family:'Playfair Display',serif;
+  font-size:1.75rem;
+  margin-bottom:8px;
+  color:var(--text-primary);
+}
+.card-subtitle{
+  font-size:0.9rem;
+  color:var(--text-muted);
+  margin-bottom:28px;
+  font-weight:500;
+}
+.form-group{margin-bottom:24px;position:relative}
+label{
+  display:block;
+  font-size:0.875rem;
+  color:var(--text-secondary);
+  font-weight:600;
+  margin-bottom:8px;
+  letter-spacing:0.3px;
+}
+.hint{
+  display:block;
+  font-size:0.75rem;
+  color:var(--text-muted);
+  margin-bottom:8px;
+  font-style:italic;
+}
+.input-wrapper{position:relative}
+input{
+  width:100%;
+  padding:14px 16px;
+  background:rgba(15,23,42,0.6);
+  border:1px solid var(--border);
+  border-radius:10px;
+  color:var(--text-primary);
+  font-size:1rem;
+  font-family:inherit;
+  font-weight:500;
+  transition:all 0.2s ease;
+}
+input:hover{border-color:rgba(59,130,246,0.4)}
+input:focus{
+  outline:none;
+  border-color:var(--accent-primary);
+  background:rgba(15,23,42,0.8);
+  box-shadow:0 0 0 3px var(--highlight-glow);
+}
+.prefix,.suffix{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  color:var(--text-muted);
+  font-weight:600;
+  pointer-events:none;
+}
+.prefix{left:16px}
+.suffix{right:16px}
+.has-prefix input{padding-left:50px}
+.has-suffix input{padding-right:60px}
+button{
+  padding:16px 24px;
+  border:none;
+  border-radius:10px;
+  font-weight:600;
+  cursor:pointer;
+  font-size:1rem;
+  transition:all 0.3s ease;
+  font-family:inherit;
+  position:relative;
+  overflow:hidden;
+}
+button::before{
+  content:'';
+  position:absolute;
+  top:50%;
+  left:50%;
+  width:0;
+  height:0;
+  border-radius:50%;
+  background:rgba(255,255,255,0.1);
+  transform:translate(-50%,-50%);
+  transition:width 0.6s,height 0.6s;
+}
+button:hover::before{
+  width:300px;
+  height:300px;
+}
+.btn-primary{
+  background:linear-gradient(135deg,var(--accent-primary),var(--accent-secondary));
+  color:white;
+  width:100%;
+  position:relative;
+  box-shadow:0 4px 16px rgba(59,130,246,0.3);
+}
+.btn-primary:hover{
+  transform:translateY(-2px);
+  box-shadow:0 8px 24px rgba(59,130,246,0.4);
+}
+.btn-primary:active{
+  transform:translateY(0);
+}
+.btn-primary:disabled{
+  opacity:0.6;
+  cursor:not-allowed;
+  transform:none;
+}
+.btn-note{
+  text-align:center;
+  font-size:0.75rem;
+  color:var(--text-muted);
+  margin-top:12px;
+  font-style:italic;
+}
+.results-container{
+  opacity:0;
+  max-height:0;
+  overflow:hidden;
+  transition:opacity 0.5s ease,max-height 0.5s ease;
+}
+.results-container.active{
+  opacity:1;
+  max-height:2000px;
+}
+.kpis{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+  gap:16px;
+  margin-bottom:32px;
+}
+.kpi-card{
+  background:rgba(59,130,246,0.05);
+  border:1px solid rgba(59,130,246,0.2);
+  border-radius:12px;
+  padding:20px;
+  text-align:center;
+  transition:all 0.3s ease;
+  animation:scaleIn 0.4s ease-out both;
+}
+@keyframes scaleIn{
+  from{opacity:0;transform:scale(0.8)}
+  to{opacity:1;transform:scale(1)}
+}
+.kpi-card:nth-child(2){animation-delay:0.1s}
+.kpi-card:nth-child(3){animation-delay:0.2s}
+.kpi-card:nth-child(4){animation-delay:0.3s}
+.kpi-card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 8px 24px rgba(59,130,246,0.2);
+}
+.kpi-card.highlight{
+  background:rgba(16,185,129,0.1);
+  border-color:rgba(16,185,129,0.4);
+}
+.kpi-card.highlight.negative{
+  background:rgba(239,68,68,0.1);
+  border-color:rgba(239,68,68,0.4);
+}
+.kpi-label{
+  font-size:0.7rem;
+  color:var(--text-muted);
+  margin-bottom:10px;
+  text-transform:uppercase;
+  font-weight:700;
+  letter-spacing:1px;
+}
+.kpi-value{
+  font-size:1.75rem;
+  font-weight:700;
+  color:var(--text-primary);
+  font-family:'Playfair Display',serif;
+}
+.kpi-card.highlight .kpi-value{color:var(--success)}
+.kpi-card.highlight.negative .kpi-value{color:var(--danger)}
+.insight{
+  background:linear-gradient(135deg,rgba(59,130,246,0.15),rgba(139,92,246,0.15));
+  border:1px solid rgba(59,130,246,0.3);
+  border-radius:12px;
+  padding:24px;
+  margin-bottom:32px;
+  position:relative;
+  overflow:hidden;
+}
+.insight::before{
+  content:'💡';
+  position:absolute;
+  top:20px;
+  right:20px;
+  font-size:3rem;
+  opacity:0.1;
+}
+.insight-label{
+  font-size:0.875rem;
+  color:#93c5fd;
+  margin-bottom:12px;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:1px;
+}
+.insight-text{
+  font-size:1.05rem;
+  color:var(--text-primary);
+  line-height:1.7;
+  position:relative;
+  z-index:1;
+}
+.insight-text strong{
+  color:#60a5fa;
+  font-weight:700;
+}
+.comparison-table{
+  background:rgba(15,23,42,0.4);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:24px;
+  margin-bottom:24px;
+}
+.comparison-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:16px 0;
+  border-bottom:1px solid var(--border);
+}
+.comparison-row:last-child{border-bottom:none}
+.comparison-label{
+  font-size:0.9rem;
+  color:var(--text-secondary);
+  font-weight:500;
+}
+.comparison-value{
+  font-size:1.1rem;
+  font-weight:700;
+  color:var(--text-primary);
+}
+.comparison-value.positive{color:var(--success)}
+.comparison-value.negative{color:var(--danger)}
+.testimonial{
+  background:var(--bg-card);
+  border-left:4px solid var(--accent-primary);
+  padding:24px;
+  border-radius:8px;
+  margin:32px 0;
+  font-style:italic;
+  color:var(--text-secondary);
+  font-size:0.95rem;
+  line-height:1.7;
+  box-shadow:0 4px 16px rgba(0,0,0,0.1);
+}
+.testimonial-author{
+  margin-top:16px;
+  font-weight:700;
+  color:var(--text-primary);
+  font-style:normal;
+  font-size:0.9rem;
+}
+.modal-overlay{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.8);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:999;
+  backdrop-filter:blur(8px);
+  animation:fadeIn 0.3s ease;
+}
+.modal-overlay.show{display:flex}
+.modal-box{
+  background:var(--bg-card);
+  border:1px solid var(--border);
+  padding:48px;
+  border-radius:16px;
+  max-width:520px;
+  width:90%;
+  position:relative;
+  box-shadow:0 24px 64px rgba(0,0,0,0.4);
+  animation:modalSlideUp 0.4s ease-out;
+}
+@keyframes modalSlideUp{
+  from{opacity:0;transform:translateY(40px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.modal-box h2{
+  font-family:'Playfair Display',serif;
+  color:var(--text-primary);
+  margin-bottom:12px;
+  font-size:2rem;
+}
+.modal-box p{
+  color:var(--text-secondary);
+  margin-bottom:32px;
+  line-height:1.6;
+}
+.modal-close{
+  position:absolute;
+  top:20px;
+  right:20px;
+  background:rgba(71,85,105,0.3);
+  border:none;
+  width:36px;
+  height:36px;
+  border-radius:50%;
+  cursor:pointer;
+  font-size:1.4rem;
+  color:var(--text-secondary);
+  transition:all 0.2s ease;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.modal-close:hover{
+  background:rgba(71,85,105,0.6);
+  color:var(--text-primary);
+  transform:rotate(90deg);
+}
+.error-message{
+  background:rgba(239,68,68,0.1);
+  border:1px solid rgba(239,68,68,0.3);
+  color:#fca5a5;
+  padding:12px 16px;
+  border-radius:8px;
+  font-size:0.875rem;
+  margin-top:8px;
+  display:none;
+}
+.error-message.show{
+  display:block;
+  animation:shake 0.5s ease;
+}
+@keyframes shake{
+  0%,100%{transform:translateX(0)}
+  25%{transform:translateX(-10px)}
+  75%{transform:translateX(10px)}
+}
+.loading-spinner{
+  display:inline-block;
+  width:16px;
+  height:16px;
+  border:2px solid rgba(255,255,255,0.3);
+  border-top-color:white;
+  border-radius:50%;
+  animation:spin 0.8s linear infinite;
+  margin-right:8px;
+}
+@keyframes spin{
+  to{transform:rotate(360deg)}
+}
+.back-button{
+  display:inline-block;
+  margin-bottom:24px;
+  padding:12px 24px;
+  background:rgba(59,130,246,0.1);
+  border:1px solid rgba(59,130,246,0.3);
+  border-radius:8px;
+  color:var(--accent-primary);
+  text-decoration:none;
+  font-weight:600;
+  transition:all 0.3s ease;
+}
+.back-button:hover{
+  background:rgba(59,130,246,0.2);
+  transform:translateX(-5px);
+}
+@media(max-width:1024px){
+  .grid{grid-template-columns:1fr}
+  .kpis{grid-template-columns:repeat(2,1fr)}
+  .header h1{font-size:2rem}
+}
+@media(max-width:640px){
+  body{padding:12px}
+  .header{padding:32px 24px}
+  .header h1{font-size:1.75rem}
+  .header p{font-size:1rem}
+  .card{padding:24px}
+  .trust-bar{flex-direction:column;gap:16px;padding:20px}
+  .kpis{grid-template-columns:1fr}
+  .modal-box{padding:32px 24px}
+  .comparison-row{flex-direction:column;align-items:flex-start;gap:8px}
+}
+</style>
+</head>
+<body>
+<div class="container">
+<a href="index.html" class="back-button">← Voltar para a página principal</a>
+
+<div class="header">
+<div class="header-content">
+<div class="badge">
+<span>📚</span>
+<span>Metodologia "A Máquina de Lucro"</span>
+</div>
+<h1>Calculadora Profissional de Potencial Airbnb</h1>
+<p>Compare o rendimento do aluguel tradicional com hospedagem de curta duração e descubra o potencial real do seu imóvel com dados precisos.</p>
+<div class="trust-bar">
+<div class="trust-item">Cálculo baseado em dados reais</div>
+<div class="trust-item">Sem cadastro necessário</div>
+<div class="trust-item">100% gratuito</div>
+</div>
+</div>
+</div>
+
+<div class="grid">
+<div class="card">
+<h3>Análise Financeira</h3>
+<p class="card-subtitle">Descubra seu potencial em 2 minutos</p>
+
+<div class="form-group">
+<label>Aluguel Tradicional (Mensal)</label>
+<span class="hint">Quanto você recebe hoje (ou receberia por mês)</span>
+<div class="input-wrapper has-prefix">
+<span class="prefix">R$</span>
+<input type="number" id="s_tradRent" value="2500" min="0" step="100">
+</div>
+<div class="error-message" id="error_tradRent">Por favor, informe um valor válido</div>
+</div>
+
+<div class="form-group">
+<label>Diária Estimada Airbnb</label>
+<span class="hint">Pesquise imóveis similares na sua região no Airbnb</span>
+<div class="input-wrapper has-prefix">
+<span class="prefix">R$</span>
+<input type="number" id="s_dailyRate" value="250" min="0" step="10">
+</div>
+<div class="error-message" id="error_dailyRate">Por favor, informe um valor válido</div>
+</div>
+
+<div class="form-group">
+<label>Ocupação Estimada (Dias/Mês)</label>
+<span class="hint">Entre 15-25 dias é uma média realista para iniciantes</span>
+<div class="input-wrapper has-suffix">
+<span class="suffix">dias</span>
+<input type="number" id="s_days" value="20" min="1" max="30" step="1">
+</div>
+<div class="error-message" id="error_days">Informe entre 1 e 30 dias</div>
+</div>
+
+<div class="form-group">
+<label>Taxa da Plataforma (Airbnb/Booking)</label>
+<span class="hint">Taxa média cobrada pelas plataformas (Airbnb: 14-16%, Booking: 15-18%)</span>
+<div class="input-wrapper has-suffix">
+<span class="suffix">%</span>
+<input type="number" id="s_platformFee" value="15" min="0" max="30" step="0.5">
+</div>
+<div class="error-message" id="error_platformFee">Informe entre 0 e 30%</div>
+</div>
+
+<div class="form-group">
+<label>Custos Mensais Totais</label>
+<span class="hint">Condomínio, IPTU, luz, água, gás, limpeza, manutenção</span>
+<div class="input-wrapper has-prefix">
+<span class="prefix">R$</span>
+<input type="number" id="s_costs" value="600" min="0" step="50">
+</div>
+<div class="error-message" id="error_costs">Por favor, informe um valor válido</div>
+</div>
+
+<button class="btn-primary" onclick="calc()" id="calcBtn">
+<span id="btnText">📊 Calcular Potencial</span>
+</button>
+<div class="btn-note">Resultado instantâneo • Sem necessidade de cadastro</div>
+
+<div class="testimonial">
+"Usei a calculadora antes de decidir. Descobri que meu apartamento poderia gerar 65% mais renda mensal. Hoje estou no Airbnb há 8 meses com 85% de ocupação."
+<div class="testimonial-author">— Ana Paula, Belo Horizonte</div>
+</div>
+</div>
+
+<div class="card">
+<h3>Resultados da Análise</h3>
+<p class="card-subtitle">A matemática da oportunidade real</p>
+
+<div id="results" class="results-container">
+<div class="insight" id="insightBox" style="display:none">
+<div class="insight-label">💡 Oportunidade Identificada</div>
+<div class="insight-text" id="insightText"></div>
+</div>
+
+<div class="kpis">
+<div class="kpi-card">
+<div class="kpi-label">Diária Média</div>
+<div class="kpi-value" id="kpi_price">-</div>
+</div>
+<div class="kpi-card">
+<div class="kpi-label">Airbnb Líquido</div>
+<div class="kpi-value" id="kpi_airbnb">-</div>
+</div>
+<div class="kpi-card">
+<div class="kpi-label">Trad. Líquido</div>
+<div class="kpi-value" id="kpi_trad">-</div>
+</div>
+<div class="kpi-card highlight" id="kpi_diff_card">
+<div class="kpi-label">Diferença Mensal</div>
+<div class="kpi-value" id="kpi_diff">-</div>
+</div>
+</div>
+
+<div style="background:rgba(59,130,246,0.05);border:1px solid rgba(59,130,246,0.2);border-radius:8px;padding:12px;margin-bottom:24px;font-size:0.8rem;color:var(--text-secondary);text-align:center">
+ℹ️ <strong>Nota:</strong> Todos os valores são líquidos. Já foram descontados:
+<br>• Taxa da plataforma (<span id="platform_fee_display">15%</span>) = <span id="platform_fee_amount">R$ 0,00</span>
+<br>• Custos operacionais = <span id="costs_display">R$ 0,00</span>
+</div>
+
+<div class="comparison-table" id="comparisonTable" style="display:none">
+<h4 style="margin-bottom:16px;color:var(--text-primary);font-size:1.1rem">Comparação Detalhada</h4>
+
+<div style="background:rgba(139,92,246,0.1);border-radius:8px;padding:16px;margin-bottom:16px">
+<div style="font-size:0.75rem;color:var(--text-muted);text-transform:uppercase;font-weight:700;margin-bottom:8px">📊 Airbnb</div>
+<div class="comparison-row" style="border:none;padding:8px 0">
+<span class="comparison-label">Receita Bruta (mês)</span>
+<span class="comparison-value" id="comp_gross">-</span>
+</div>
+<div class="comparison-row" style="border:none;padding:8px 0">
+<span class="comparison-label">− Taxa da Plataforma</span>
+<span class="comparison-value" style="color:var(--danger)" id="comp_platform_fee">-</span>
+</div>
+<div class="comparison-row" style="border:none;padding:8px 0;background:rgba(59,130,246,0.1);margin:4px -8px;padding:8px">
+<span class="comparison-label" style="font-weight:600">= Receita após taxa</span>
+<span class="comparison-value" id="comp_after_fee">-</span>
+</div>
+<div class="comparison-row" style="border:none;padding:8px 0">
+<span class="comparison-label">− Custos Operacionais</span>
+<span class="comparison-value" style="color:var(--danger)" id="comp_costs_air">-</span>
+</div>
+<div class="comparison-row" style="border-top:2px solid rgba(139,92,246,0.3);padding-top:12px;margin-top:8px">
+<span class="comparison-label" style="font-weight:700">= Lucro Líquido</span>
+<span class="comparison-value positive" style="font-size:1.3rem" id="comp_netAir">-</span>
+</div>
+</div>
+
+<div style="background:rgba(59,130,246,0.1);border-radius:8px;padding:16px;margin-bottom:16px">
+<div style="font-size:0.75rem;color:var(--text-muted);text-transform:uppercase;font-weight:700;margin-bottom:8px">🏠 Aluguel Tradicional</div>
+<div class="comparison-row" style="border:none;padding:8px 0">
+<span class="comparison-label">Receita Bruta (mês)</span>
+<span class="comparison-value" id="comp_trad_gross">-</span>
+</div>
+<div class="comparison-row" style="border:none;padding:8px 0">
+<span class="comparison-label">− Custos Operacionais</span>
+<span class="comparison-value" style="color:var(--danger)" id="comp_costs_trad">-</span>
+</div>
+<div class="comparison-row" style="border-top:2px solid rgba(59,130,246,0.3);padding-top:12px;margin-top:8px">
+<span class="comparison-label" style="font-weight:700">= Lucro Líquido</span>
+<span class="comparison-value" style="font-size:1.3rem" id="comp_netTrad">-</span>
+</div>
+</div>
+
+<div style="background:linear-gradient(135deg,rgba(16,185,129,0.15),rgba(59,130,246,0.15));border-radius:8px;padding:20px;border:2px solid rgba(16,185,129,0.3)">
+<div class="comparison-row" style="border:none">
+<span class="comparison-label" style="font-weight:700;font-size:1.1rem;color:var(--text-primary)">💰 Ganho Adicional (mês)</span>
+<span class="comparison-value positive" style="font-size:1.5rem" id="comp_monthly_diff">-</span>
+</div>
+<div class="comparison-row" style="border:none;padding-top:12px">
+<span class="comparison-label" style="font-weight:700;font-size:1.1rem;color:var(--text-primary)">📈 Ganho Adicional (ano)</span>
+<span class="comparison-value positive" style="font-size:1.5rem" id="comp_yearly">-</span>
+</div>
+</div>
+</div>
+
+<button class="btn-primary" onclick="openModal()" id="reportBtn">
+<span>📥 Receber Relatório Completo (CSV)</span>
+</button>
+</div>
+
+<div style="text-align:center;color:var(--text-muted);font-size:0.875rem;margin-top:24px;font-style:italic;line-height:1.6">
+"A diferença entre quem vai enriquecer e quem vai ficar para trás é apenas uma — ação imediata." <br><span style="color:var(--text-secondary)">(Cap. 1 - A Máquina de Lucro)</span>
+</div>
+</div>
+</div>
+</div>
+
+<div class="modal-overlay" id="leadModal">
+<div class="modal-box">
+<button class="modal-close" onclick="closeModal()">×</button>
+<h2>Receber Relatório Completo</h2>
+<p>Informe seus dados para receber o relatório detalhado em formato CSV com todas as projeções financeiras.</p>
+<div class="form-group">
+<label>Nome Completo</label>
+<input type="text" id="leadName" placeholder="Seu nome completo">
+<div class="error-message" id="error_leadName">Por favor, informe seu nome</div>
+</div>
+<div class="form-group">
+<label>E-mail</label>
+<input type="email" id="leadEmail" placeholder="seuemail@exemplo.com">
+<div class="error-message" id="error_leadEmail">Por favor, informe um e-mail válido</div>
+</div>
+<button class="btn-primary" onclick="submitLead()" id="submitBtn">
+<span id="submitBtnText">Gerar e Baixar Relatório</span>
+</button>
+</div>
+</div>
+
+<script>
+let calculationData = null;
+function fmt(v) {
+  return new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL',
+    minimumFractionDigits: 2
+  }).format(v);
+}
+function validateField(id, value, min = 0, max = Infinity) {
+  const errorEl = document.getElementById('error_' + id);
+  const inputEl = document.getElementById('s_' + id) || document.getElementById(id);
+  if (!value || value < min || value > max || isNaN(value)) {
+    errorEl.classList.add('show');
+    inputEl.style.borderColor = 'var(--danger)';
+    return false;
+  }
+  errorEl.classList.remove('show');
+  inputEl.style.borderColor = '';
+  return true;
+}
+function calc() {
+  const tradRent = parseFloat(document.getElementById('s_tradRent').value) || 0;
+  const dailyRate = parseFloat(document.getElementById('s_dailyRate').value) || 0;
+  const days = parseFloat(document.getElementById('s_days').value) || 0;
+  const platformFee = parseFloat(document.getElementById('s_platformFee').value) || 0;
+  const costs = parseFloat(document.getElementById('s_costs').value) || 0;
+  let isValid = true;
+  isValid = validateField('tradRent', tradRent, 1) && isValid;
+  isValid = validateField('dailyRate', dailyRate, 1) && isValid;
+  isValid = validateField('days', days, 1, 30) && isValid;
+  isValid = validateField('platformFee', platformFee, 0, 30) && isValid;
+  isValid = validateField('costs', costs, 0) && isValid;
+  if (!isValid) {
+    return;
+  }
+  const btn = document.getElementById('calcBtn');
+  const btnText = document.getElementById('btnText');
+  btnText.innerHTML = '<span class="loading-spinner"></span>Calculando...';
+  btn.disabled = true;
+  setTimeout(() => {
+    const grossRevenue = dailyRate * days;
+    const platformFeeAmount = grossRevenue * (platformFee / 100);
+    const revenueAfterPlatformFee = grossRevenue - platformFeeAmount;
+    const netAirbnb = revenueAfterPlatformFee - costs;
+    const netTraditional = tradRent - costs;
+    const difference = netAirbnb - netTraditional;
+    const yearlyDifference = difference * 12;
+    const percentIncrease = ((difference / netTraditional) * 100).toFixed(1);
+    calculationData = {
+      tradRent,
+      dailyRate,
+      days,
+      platformFee,
+      platformFeeAmount,
+      costs,
+      grossRevenue,
+      revenueAfterPlatformFee,
+      netAirbnb,
+      netTraditional,
+      difference,
+      yearlyDifference,
+      percentIncrease
+    };
+    document.getElementById('kpi_price').innerText = fmt(dailyRate);
+    document.getElementById('kpi_airbnb').innerText = fmt(netAirbnb);
+    document.getElementById('kpi_trad').innerText = fmt(netTraditional);
+    document.getElementById('costs_display').innerText = fmt(costs);
+    document.getElementById('platform_fee_display').innerText = platformFee.toFixed(1) + '%';
+    document.getElementById('platform_fee_amount').innerText = fmt(platformFeeAmount);
+    document.getElementById('comp_gross').innerText = fmt(grossRevenue);
+    document.getElementById('comp_platform_fee').innerText = fmt(platformFeeAmount);
+    document.getElementById('comp_after_fee').innerText = fmt(revenueAfterPlatformFee);
+    document.getElementById('comp_costs_air').innerText = fmt(costs);
+    document.getElementById('comp_costs_trad').innerText = fmt(costs);
+    document.getElementById('comp_trad_gross').innerText = fmt(tradRent);
+    document.getElementById('comp_netAir').innerText = fmt(netAirbnb);
+    document.getElementById('comp_netTrad').innerText = fmt(netTraditional);
+    document.getElementById('comp_monthly_diff').innerText = (difference > 0 ? '+ ' : '') + fmt(difference);
+    document.getElementById('comp_yearly').innerText = (yearlyDifference > 0 ? '+ ' : '') + fmt(yearlyDifference);
+    const diffCard = document.getElementById('kpi_diff_card');
+    const diffValue = document.getElementById('kpi_diff');
+    const insightBox = document.getElementById('insightBox');
+    const insightText = document.getElementById('insightText');
+    diffValue.innerText = (difference > 0 ? '+ ' : '') + fmt(difference);
+    if (difference > 0) {
+      diffCard.classList.remove('negative');
+      diffCard.classList.add('highlight');
+      insightBox.style.display = 'block';
+      let message = 'Você pode ganhar <strong>' + fmt(difference) + '</strong> A MAIS por mês com Airbnb! ';
+      message += 'Isso representa <strong>' + fmt(yearlyDifference) + '</strong> adicionais por ano ';
+      message += '(aumento de <strong>' + percentIncrease + '%</strong> na sua renda).';
+      if (difference > 1000) {
+        message += '<br><br>🎯 Com essa diferença, você poderia investir, viajar ou poupar significativamente mais todos os meses.';
+      }
+      insightText.innerHTML = message;
+    } else if (difference < 0) {
+      diffCard.classList.add('negative');
+      diffCard.classList.remove('highlight');
+      insightBox.style.display = 'block';
+      insightText.innerHTML = 'Com os valores informados, o aluguel tradicional ainda é mais vantajoso em <strong>' + fmt(Math.abs(difference)) + '</strong> por mês. Considere ajustar a diária ou aumentar a taxa de ocupação.';
+    } else {
+      diffCard.classList.remove('negative', 'highlight');
+      insightBox.style.display = 'none';
+    }
+    document.getElementById('results').classList.add('active');
+    document.getElementById('comparisonTable').style.display = 'block';
+    btnText.textContent = '✓ Cálculo Concluído';
+    setTimeout(() => {
+      btnText.textContent = '📊 Recalcular';
+      btn.disabled = false;
+    }, 2000);
+    setTimeout(() => {
+      document.getElementById('results').scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'nearest'
+      });
+    }, 300);
+  }, 1000);
+}
+function openModal() {
+  if (!calculationData) {
+    alert('Por favor, calcule primeiro para gerar o relatório.');
+    return;
+  }
+  document.getElementById('leadModal').classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal() {
+  document.getElementById('leadModal').classList.remove('show');
+  document.body.style.overflow = '';
+  document.getElementById('error_leadName').classList.remove('show');
+  document.getElementById('error_leadEmail').classList.remove('show');
+  document.getElementById('leadName').style.borderColor = '';
+  document.getElementById('leadEmail').style.borderColor = '';
+}
+function generateCSV(data, name, email) {
+  const csvContent = 'RELATÓRIO DE ANÁLISE AIRBNB - A MÁQUINA DE LUCRO\nData da Análise,' + new Date().toLocaleDateString('pt-BR') + '\nNome,' + name + '\nE-mail,' + email + '\n\nDADOS DE ENTRADA\nAluguel Tradicional Mensal (Bruto),' + data.tradRent.toFixed(2) + '\nDiária Estimada Airbnb,' + data.dailyRate.toFixed(2) + '\nDias de Ocupação (Mês),' + data.days + '\nTaxa da Plataforma (%),' + data.platformFee.toFixed(1) + '\nCustos Operacionais Mensais,' + data.costs.toFixed(2) + '\n\nANÁLISE AIRBNB - DETALHAMENTO\nReceita Bruta (Mês),' + data.grossRevenue.toFixed(2) + '\nTaxa da Plataforma (' + data.platformFee.toFixed(1) + '%),' + data.platformFeeAmount.toFixed(2) + '\nReceita Após Taxa da Plataforma,' + data.revenueAfterPlatformFee.toFixed(2) + '\nCustos Operacionais,' + data.costs.toFixed(2) + '\nLucro Líquido (Mês),' + data.netAirbnb.toFixed(2) + '\n\nANÁLISE ALUGUEL TRADICIONAL\nReceita Bruta (Mês),' + data.tradRent.toFixed(2) + '\nCustos Operacionais,' + data.costs.toFixed(2) + '\nLucro Líquido (Mês),' + data.netTraditional.toFixed(2) + '\n\nCOMPARAÇÃO DE RESULTADOS\nDiferença Mensal (Líquido),' + data.difference.toFixed(2) + '\nDiferença Anual (Líquido),' + data.yearlyDifference.toFixed(2) + '\nAumento Percentual,' + data.percentIncrease + '%\n\nPROJEÇÃO ANUAL (12 MESES)\nAirbnb - Receita Bruta,' + (data.grossRevenue * 12).toFixed(2) + '\nAirbnb - Taxa Plataforma Total,' + (data.platformFeeAmount * 12).toFixed(2) + '\nAirbnb - Custos Totais,' + (data.costs * 12).toFixed(2) + '\nAirbnb - Lucro Líquido,' + (data.netAirbnb * 12).toFixed(2) + '\nTradicional - Receita Bruta,' + (data.tradRent * 12).toFixed(2) + '\nTradicional - Custos Totais,' + (data.costs * 12).toFixed(2) + '\nTradicional - Lucro Líquido,' + (data.netTraditional * 12).toFixed(2) + '\n\nCONCLUSÃO\n' + (data.difference > 0 ? 'Migrar para Airbnb pode gerar R$ ' + data.yearlyDifference.toFixed(2) + ' adicionais por ano (' + data.percentIncrease + '% de aumento no lucro líquido).' : 'Com os valores atuais, o aluguel tradicional ainda gera R$ ' + Math.abs(data.difference).toFixed(2) + ' a mais por mês em lucro líquido.') + '\n\nOBSERVAÇÕES\nOs valores líquidos já consideram:\n- Desconto da taxa da plataforma de ' + data.platformFee.toFixed(1) + '% (R$ ' + data.platformFeeAmount.toFixed(2) + '/mês)\n- Desconto dos custos operacionais mensais de R$ ' + data.costs.toFixed(2) + '\nPara o Airbnb, foi considerada ocupação de ' + data.days + ' dias por mês.\nRecomenda-se analisar também: impostos, sazonalidade e possíveis oscilações na ocupação.\n\nRelatório gerado pela Calculadora A Máquina de Lucro\nwww.amaquinadelucro.com.br';
+  return csvContent;
+}
+function downloadCSV(content, filename) {
+  const blob = new Blob(['\ufeff' + content], { type: 'text/csv;charset=utf-8;' });
+  const link = document.createElement('a');
+  const url = URL.createObjectURL(blob);
+  link.setAttribute('href', url);
+  link.setAttribute('download', filename);
+  link.style.visibility = 'hidden';
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
+function submitLead() {
+  const name = document.getElementById('leadName').value.trim();
+  const email = document.getElementById('leadEmail').value.trim();
+  let isValid = true;
+  if (!name || name.length < 3) {
+    document.getElementById('error_leadName').classList.add('show');
+    document.getElementById('leadName').style.borderColor = 'var(--danger)';
+    isValid = false;
+  } else {
+    document.getElementById('error_leadName').classList.remove('show');
+    document.getElementById('leadName').style.borderColor = '';
+  }
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!email || !emailRegex.test(email)) {
+    document.getElementById('error_leadEmail').classList.add('show');
+    document.getElementById('leadEmail').style.borderColor = 'var(--danger)';
+    isValid = false;
+  } else {
+    document.getElementById('error_leadEmail').classList.remove('show');
+    document.getElementById('leadEmail').style.borderColor = '';
+  }
+  if (!isValid) return;
+  const btn = document.getElementById('submitBtn');
+  const btnText = document.getElementById('submitBtnText');
+  btnText.innerHTML = '<span class="loading-spinner"></span>Gerando relatório...';
+  btn.disabled = true;
+  setTimeout(() => {
+    const csvContent = generateCSV(calculationData, name, email);
+    const filename = 'relatorio-airbnb-' + new Date().getTime() + '.csv';
+    downloadCSV(csvContent, filename);
+    btnText.innerHTML = '✓ Relatório Baixado!';
+    setTimeout(() => {
+      closeModal();
+      btnText.textContent = 'Gerar e Baixar Relatório';
+      btn.disabled = false;
+      document.getElementById('leadName').value = '';
+      document.getElementById('leadEmail').value = '';
+      alert('✓ Relatório CSV baixado com sucesso!\n\nObrigado por usar nossa calculadora, ' + name + '!');
+    }, 2000);
+  }, 1500);
+}
+document.getElementById('leadModal').addEventListener('click', function(e) {
+  if (e.target === this) {
+    closeModal();
+  }
+});
+document.querySelectorAll('input').forEach(input => {
+  input.addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+      const modal = document.getElementById('leadModal');
+      if (modal.classList.contains('show')) {
+        submitLead();
+      } else {
+        calc();
+      }
+    }
+  });
+});
+document.querySelectorAll('input').forEach(input => {
+  input.addEventListener('input', function() {
+    const errorId = 'error_' + this.id.replace('s_', '');
+    const errorEl = document.getElementById(errorId);
+    if (errorEl) {
+      errorEl.classList.remove('show');
+      this.style.borderColor = '';
+    }
+  });
+});
+</script>
+</body>
+</html>
