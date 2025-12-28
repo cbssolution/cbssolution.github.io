@@ -33,8 +33,13 @@ body{
   font-family:'Space Grotesk',system-ui,sans-serif;
   padding:20px;
   line-height:1.6;
+  overflow-x:hidden;
 }
-.container{max-width:1400px;margin:0 auto}
+.container{
+  max-width:1400px;
+  margin:0 auto;
+  width:100%;
+}
 .header{
   background:var(--bg-card);
   border:1px solid var(--border);
@@ -137,7 +142,7 @@ body{
 }
 .grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(500px,1fr));
+  grid-template-columns:repeat(auto-fit,minmax(min(100%, 500px),1fr));
   gap:24px;
   margin-bottom:24px;
 }
@@ -374,6 +379,7 @@ button:hover::before{
   border-radius:12px;
   padding:24px;
   margin-bottom:24px;
+  overflow-x:auto;
 }
 .comparison-row{
   display:flex;
@@ -525,21 +531,562 @@ button:hover::before{
   background:rgba(59,130,246,0.2);
   transform:translateX(-5px);
 }
-@media(max-width:1024px){
-  .grid{grid-template-columns:1fr}
-  .kpis{grid-template-columns:repeat(2,1fr)}
-  .header h1{font-size:2rem}
+
+.cta-container{
+  display:flex;
+  gap:20px;
+  justify-content:center;
+  flex-wrap:wrap;
 }
+
+.cta-primary{
+  display:inline-block;
+  padding:18px 40px;
+  background:linear-gradient(135deg,#d4af37,#f2d574);
+  color:#0a0a0a;
+  font-weight:700;
+  font-size:1.1rem;
+  border-radius:12px;
+  text-decoration:none;
+  text-transform:uppercase;
+  letter-spacing:1px;
+  box-shadow:0 8px 24px rgba(212,175,55,0.4);
+  transition:all 0.3s ease;
+  text-align:center;
+  min-width:220px;
+}
+
+.cta-primary:hover{
+  transform:translateY(-4px);
+  box-shadow:0 12px 32px rgba(212,175,55,0.6);
+}
+
+.cta-secondary{
+  display:inline-block;
+  padding:18px 40px;
+  background:rgba(59,130,246,0.2);
+  color:#60a5fa;
+  font-weight:600;
+  font-size:1.1rem;
+  border-radius:12px;
+  text-decoration:none;
+  border:2px solid rgba(59,130,246,0.4);
+  transition:all 0.3s ease;
+  text-align:center;
+  min-width:220px;
+}
+
+.cta-secondary:hover{
+  background:rgba(59,130,246,0.3);
+  border-color:rgba(59,130,246,0.6);
+}
+
+.conversion-box{
+  background:linear-gradient(135deg,rgba(212,175,55,0.15),rgba(212,175,55,0.05));
+  border:2px solid rgba(212,175,55,0.4);
+  border-radius:16px;
+  padding:40px;
+  margin-top:40px;
+  text-align:center;
+}
+
+.conversion-title{
+  font-size:1.8rem;
+  font-weight:700;
+  color:#d4af37;
+  margin-bottom:16px;
+  font-family:'Playfair Display',serif;
+}
+
+.conversion-text{
+  font-size:1.1rem;
+  color:var(--text-secondary);
+  margin-bottom:32px;
+  line-height:1.7;
+}
+
+.conversion-footer{
+  margin-top:32px;
+  padding-top:32px;
+  border-top:1px solid rgba(255,255,255,0.1);
+}
+
+.conversion-quote{
+  font-size:0.9rem;
+  color:var(--text-muted);
+  font-style:italic;
+  line-height:1.7;
+}
+
+@media(max-width:1024px){
+  .grid{
+    grid-template-columns:1fr;
+    gap:20px;
+  }
+  .kpis{
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+  }
+  .header h1{font-size:2rem}
+  .header p{font-size:1rem}
+}
+
+@media(max-width:768px){
+  body{padding:16px}
+  .container{padding:0}
+  
+  .header{
+    padding:32px 20px;
+    margin-bottom:24px;
+  }
+  .header h1{
+    font-size:1.75rem;
+    margin-bottom:12px;
+  }
+  .header p{
+    font-size:0.95rem;
+    margin-bottom:24px;
+  }
+  .badge{
+    font-size:0.75rem;
+    padding:8px 16px;
+    margin-bottom:16px;
+  }
+  
+  .trust-bar{
+    flex-direction:column;
+    gap:12px;
+    padding:16px;
+  }
+  .trust-item{
+    font-size:0.85rem;
+  }
+  
+  .grid{
+    grid-template-columns:1fr;
+    gap:20px;
+  }
+  
+  .card{
+    padding:24px 20px;
+  }
+  .card h3{
+    font-size:1.5rem;
+    margin-bottom:6px;
+  }
+  .card-subtitle{
+    font-size:0.85rem;
+    margin-bottom:20px;
+  }
+  
+  .form-group{
+    margin-bottom:20px;
+  }
+  label{
+    font-size:0.8rem;
+    margin-bottom:6px;
+  }
+  .hint{
+    font-size:0.7rem;
+    margin-bottom:6px;
+  }
+  input{
+    padding:12px 14px;
+    font-size:0.95rem;
+  }
+  .has-prefix input{padding-left:45px}
+  .has-suffix input{padding-right:55px}
+  
+  button{
+    padding:14px 20px;
+    font-size:0.95rem;
+  }
+  
+  .kpis{
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+  }
+  .kpi-card{
+    padding:16px 12px;
+  }
+  .kpi-label{
+    font-size:0.65rem;
+    margin-bottom:8px;
+  }
+  .kpi-value{
+    font-size:1.4rem;
+  }
+  
+  .insight{
+    padding:20px;
+    margin-bottom:24px;
+  }
+  .insight-label{
+    font-size:0.8rem;
+    margin-bottom:10px;
+  }
+  .insight-text{
+    font-size:0.95rem;
+    line-height:1.6;
+  }
+  
+  .comparison-table{
+    padding:20px 16px;
+    margin-bottom:20px;
+  }
+  .comparison-table h4{
+    font-size:1rem;
+    margin-bottom:12px;
+  }
+  .comparison-row{
+    flex-direction:row;
+    justify-content:space-between;
+    padding:12px 0;
+    gap:10px;
+  }
+  .comparison-label{
+    font-size:0.85rem;
+    flex:1;
+  }
+  .comparison-value{
+    font-size:1rem;
+    text-align:right;
+  }
+  
+  .testimonial{
+    padding:20px;
+    margin:24px 0;
+    font-size:0.9rem;
+  }
+  .testimonial-author{
+    font-size:0.85rem;
+    margin-top:12px;
+  }
+  
+  .back-button{
+    padding:10px 20px;
+    font-size:0.9rem;
+    margin-bottom:20px;
+  }
+  
+  .conversion-box{
+    padding:32px 20px;
+    margin-top:32px;
+  }
+  .conversion-title{
+    font-size:1.5rem;
+    margin-bottom:14px;
+  }
+  .conversion-text{
+    font-size:1rem;
+    margin-bottom:28px;
+  }
+  .cta-container{
+    gap:16px;
+  }
+  .cta-primary, .cta-secondary{
+    padding:16px 32px;
+    font-size:1rem;
+    min-width:200px;
+  }
+  .conversion-footer{
+    margin-top:28px;
+    padding-top:28px;
+  }
+  .conversion-quote{
+    font-size:0.85rem;
+  }
+}
+
 @media(max-width:640px){
   body{padding:12px}
-  .header{padding:32px 24px}
-  .header h1{font-size:1.75rem}
-  .header p{font-size:1rem}
-  .card{padding:24px}
-  .trust-bar{flex-direction:column;gap:16px;padding:20px}
-  .kpis{grid-template-columns:1fr}
-  .modal-box{padding:32px 24px}
-  .comparison-row{flex-direction:column;align-items:flex-start;gap:8px}
+  
+  .header{
+    padding:28px 16px;
+    margin-bottom:20px;
+  }
+  .header h1{
+    font-size:1.5rem;
+    line-height:1.2;
+  }
+  .header p{
+    font-size:0.9rem;
+    line-height:1.5;
+  }
+  .badge{
+    font-size:0.7rem;
+    padding:6px 12px;
+  }
+  
+  .trust-bar{
+    gap:10px;
+    padding:12px;
+  }
+  .trust-item{
+    font-size:0.8rem;
+  }
+  .trust-item::before{
+    width:24px;
+    height:24px;
+    font-size:1.1rem;
+  }
+  
+  .card{
+    padding:20px 16px;
+  }
+  .card h3{
+    font-size:1.3rem;
+  }
+  .card-subtitle{
+    font-size:0.8rem;
+  }
+  
+  .form-group{
+    margin-bottom:18px;
+  }
+  label{
+    font-size:0.75rem;
+  }
+  .hint{
+    font-size:0.68rem;
+  }
+  input{
+    padding:11px 12px;
+    font-size:0.9rem;
+  }
+  .prefix{
+    left:12px;
+    font-size:0.9rem;
+  }
+  .suffix{
+    right:12px;
+    font-size:0.9rem;
+  }
+  .has-prefix input{padding-left:40px}
+  .has-suffix input{padding-right:50px}
+  
+  button{
+    padding:13px 18px;
+    font-size:0.9rem;
+  }
+  .btn-note{
+    font-size:0.7rem;
+    margin-top:10px;
+  }
+  
+  .kpis{
+    grid-template-columns:1fr;
+    gap:10px;
+  }
+  .kpi-card{
+    padding:16px;
+  }
+  .kpi-label{
+    font-size:0.65rem;
+  }
+  .kpi-value{
+    font-size:1.5rem;
+  }
+  
+  .insight{
+    padding:16px;
+    margin-bottom:20px;
+  }
+  .insight::before{
+    font-size:2rem;
+    top:12px;
+    right:12px;
+  }
+  .insight-label{
+    font-size:0.75rem;
+  }
+  .insight-text{
+    font-size:0.9rem;
+  }
+  
+  .comparison-table{
+    padding:16px 12px;
+  }
+  .comparison-table h4{
+    font-size:0.95rem;
+  }
+  .comparison-table > div{
+    padding:12px !important;
+  }
+  .comparison-row{
+    padding:10px 0 !important;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:6px;
+  }
+  .comparison-label{
+    font-size:0.8rem;
+  }
+  .comparison-value{
+    font-size:0.95rem;
+    text-align:left;
+    align-self:flex-start;
+  }
+  
+  .testimonial{
+    padding:16px;
+    margin:20px 0;
+    font-size:0.85rem;
+  }
+  
+  .back-button{
+    padding:10px 16px;
+    font-size:0.85rem;
+    margin-bottom:16px;
+  }
+  
+  .conversion-box{
+    padding:28px 16px;
+    margin-top:28px;
+    border-radius:12px;
+  }
+  .conversion-title{
+    font-size:1.3rem;
+    margin-bottom:12px;
+    line-height:1.3;
+  }
+  .conversion-text{
+    font-size:0.95rem;
+    margin-bottom:24px;
+    line-height:1.6;
+  }
+  .cta-container{
+    gap:12px;
+    flex-direction:column;
+  }
+  .cta-primary, .cta-secondary{
+    padding:14px 24px;
+    font-size:0.95rem;
+    min-width:100%;
+    width:100%;
+  }
+  .conversion-footer{
+    margin-top:24px;
+    padding-top:24px;
+  }
+  .conversion-quote{
+    font-size:0.8rem;
+    line-height:1.6;
+  }
+}
+
+@media(max-width:480px){
+  body{padding:10px}
+  
+  .header{
+    padding:24px 14px;
+  }
+  .header h1{
+    font-size:1.35rem;
+  }
+  .header p{
+    font-size:0.85rem;
+  }
+  
+  .card{
+    padding:18px 14px;
+  }
+  .card h3{
+    font-size:1.2rem;
+  }
+  
+  input{
+    padding:10px;
+    font-size:0.85rem;
+  }
+  .has-prefix input{padding-left:38px}
+  .has-suffix input{padding-right:48px}
+  .prefix, .suffix{
+    font-size:0.85rem;
+  }
+  
+  button{
+    padding:12px 16px;
+    font-size:0.85rem;
+  }
+  
+  .kpi-value{
+    font-size:1.4rem;
+  }
+  
+  .conversion-box{
+    padding:24px 14px;
+    margin-top:24px;
+  }
+  .conversion-title{
+    font-size:1.2rem;
+  }
+  .conversion-text{
+    font-size:0.9rem;
+    margin-bottom:20px;
+  }
+  .cta-primary, .cta-secondary{
+    padding:13px 20px;
+    font-size:0.9rem;
+    letter-spacing:0.5px;
+  }
+  .conversion-footer{
+    margin-top:20px;
+    padding-top:20px;
+  }
+  .conversion-quote{
+    font-size:0.78rem;
+  }
+  
+  .comparison-table{
+    padding:14px 10px;
+  }
+  .comparison-row{
+    padding:8px 0 !important;
+  }
+  .comparison-label{
+    font-size:0.75rem;
+  }
+  .comparison-value{
+    font-size:0.9rem;
+  }
+}
+
+@media(max-width:380px){
+  .header h1{
+    font-size:1.2rem;
+  }
+  .header p{
+    font-size:0.8rem;
+  }
+  
+  .kpi-label{
+    font-size:0.6rem;
+  }
+  .kpi-value{
+    font-size:1.3rem;
+  }
+  
+  .conversion-title{
+    font-size:1.1rem;
+  }
+  .conversion-text{
+    font-size:0.85rem;
+  }
+  .cta-primary, .cta-secondary{
+    padding:12px 18px;
+    font-size:0.85rem;
+  }
+  .conversion-quote{
+    font-size:0.75rem;
+  }
+  
+  .comparison-label{
+    font-size:0.72rem;
+  }
+  .comparison-value{
+    font-size:0.85rem;
+  }
 }
 </style>
 </head>
@@ -719,36 +1266,32 @@ button:hover::before{
 </div>
 </div>
 
-<button class="btn-primary" onclick="openModal()" id="reportBtn">
-<span>📥 Receber Relatório Completo (CSV)</span>
-</button>
+<div class="conversion-box">
+<div class="conversion-title">
+🎯 Pronto para Transformar Esse Potencial em Realidade?
+</div>
+<p class="conversion-text">
+Agora que você viu os números reais, é hora de aprender exatamente <strong style="color:var(--text-primary)">como fazer isso acontecer</strong>. Nossos guias te ensinam cada passo para transformar seu imóvel em uma máquina de lucro.
+</p>
+
+<div class="cta-container">
+<a href="index.html#oferta" class="cta-primary">
+⭐ Ver Pacotes e Preços
+</a>
+<a href="index.html" class="cta-secondary">
+← Voltar ao Início
+</a>
 </div>
 
-<div style="text-align:center;color:var(--text-muted);font-size:0.875rem;margin-top:24px;font-style:italic;line-height:1.6">
-"A diferença entre quem vai enriquecer e quem vai ficar para trás é apenas uma — ação imediata." <br><span style="color:var(--text-secondary)">(Cap. 1 - A Máquina de Lucro)</span>
+<div class="conversion-footer">
+<div class="conversion-quote">
+💡 <strong style="color:var(--text-primary)">"A diferença entre quem vai enriquecer e quem vai ficar para trás é apenas uma — ação imediata."</strong>
+<br><span style="color:var(--text-secondary);font-size:0.9em">(Cap. 1 - A Máquina de Lucro)</span>
 </div>
 </div>
 </div>
 </div>
-
-<div class="modal-overlay" id="leadModal">
-<div class="modal-box">
-<button class="modal-close" onclick="closeModal()">×</button>
-<h2>Receber Relatório Completo</h2>
-<p>Informe seus dados para receber o relatório detalhado em formato CSV com todas as projeções financeiras.</p>
-<div class="form-group">
-<label>Nome Completo</label>
-<input type="text" id="leadName" placeholder="Seu nome completo">
-<div class="error-message" id="error_leadName">Por favor, informe seu nome</div>
 </div>
-<div class="form-group">
-<label>E-mail</label>
-<input type="email" id="leadEmail" placeholder="seuemail@exemplo.com">
-<div class="error-message" id="error_leadEmail">Por favor, informe um e-mail válido</div>
-</div>
-<button class="btn-primary" onclick="submitLead()" id="submitBtn">
-<span id="submitBtnText">Gerar e Baixar Relatório</span>
-</button>
 </div>
 </div>
 
@@ -872,92 +1415,10 @@ function calc() {
     }, 300);
   }, 1000);
 }
-function openModal() {
-  if (!calculationData) {
-    alert('Por favor, calcule primeiro para gerar o relatório.');
-    return;
-  }
-  document.getElementById('leadModal').classList.add('show');
-  document.body.style.overflow = 'hidden';
-}
-function closeModal() {
-  document.getElementById('leadModal').classList.remove('show');
-  document.body.style.overflow = '';
-  document.getElementById('error_leadName').classList.remove('show');
-  document.getElementById('error_leadEmail').classList.remove('show');
-  document.getElementById('leadName').style.borderColor = '';
-  document.getElementById('leadEmail').style.borderColor = '';
-}
-function generateCSV(data, name, email) {
-  const csvContent = 'RELATÓRIO DE ANÁLISE AIRBNB - A MÁQUINA DE LUCRO\nData da Análise,' + new Date().toLocaleDateString('pt-BR') + '\nNome,' + name + '\nE-mail,' + email + '\n\nDADOS DE ENTRADA\nAluguel Tradicional Mensal (Bruto),' + data.tradRent.toFixed(2) + '\nDiária Estimada Airbnb,' + data.dailyRate.toFixed(2) + '\nDias de Ocupação (Mês),' + data.days + '\nTaxa da Plataforma (%),' + data.platformFee.toFixed(1) + '\nCustos Operacionais Mensais,' + data.costs.toFixed(2) + '\n\nANÁLISE AIRBNB - DETALHAMENTO\nReceita Bruta (Mês),' + data.grossRevenue.toFixed(2) + '\nTaxa da Plataforma (' + data.platformFee.toFixed(1) + '%),' + data.platformFeeAmount.toFixed(2) + '\nReceita Após Taxa da Plataforma,' + data.revenueAfterPlatformFee.toFixed(2) + '\nCustos Operacionais,' + data.costs.toFixed(2) + '\nLucro Líquido (Mês),' + data.netAirbnb.toFixed(2) + '\n\nANÁLISE ALUGUEL TRADICIONAL\nReceita Bruta (Mês),' + data.tradRent.toFixed(2) + '\nCustos Operacionais,' + data.costs.toFixed(2) + '\nLucro Líquido (Mês),' + data.netTraditional.toFixed(2) + '\n\nCOMPARAÇÃO DE RESULTADOS\nDiferença Mensal (Líquido),' + data.difference.toFixed(2) + '\nDiferença Anual (Líquido),' + data.yearlyDifference.toFixed(2) + '\nAumento Percentual,' + data.percentIncrease + '%\n\nPROJEÇÃO ANUAL (12 MESES)\nAirbnb - Receita Bruta,' + (data.grossRevenue * 12).toFixed(2) + '\nAirbnb - Taxa Plataforma Total,' + (data.platformFeeAmount * 12).toFixed(2) + '\nAirbnb - Custos Totais,' + (data.costs * 12).toFixed(2) + '\nAirbnb - Lucro Líquido,' + (data.netAirbnb * 12).toFixed(2) + '\nTradicional - Receita Bruta,' + (data.tradRent * 12).toFixed(2) + '\nTradicional - Custos Totais,' + (data.costs * 12).toFixed(2) + '\nTradicional - Lucro Líquido,' + (data.netTraditional * 12).toFixed(2) + '\n\nCONCLUSÃO\n' + (data.difference > 0 ? 'Migrar para Airbnb pode gerar R$ ' + data.yearlyDifference.toFixed(2) + ' adicionais por ano (' + data.percentIncrease + '% de aumento no lucro líquido).' : 'Com os valores atuais, o aluguel tradicional ainda gera R$ ' + Math.abs(data.difference).toFixed(2) + ' a mais por mês em lucro líquido.') + '\n\nOBSERVAÇÕES\nOs valores líquidos já consideram:\n- Desconto da taxa da plataforma de ' + data.platformFee.toFixed(1) + '% (R$ ' + data.platformFeeAmount.toFixed(2) + '/mês)\n- Desconto dos custos operacionais mensais de R$ ' + data.costs.toFixed(2) + '\nPara o Airbnb, foi considerada ocupação de ' + data.days + ' dias por mês.\nRecomenda-se analisar também: impostos, sazonalidade e possíveis oscilações na ocupação.\n\nRelatório gerado pela Calculadora A Máquina de Lucro\nwww.amaquinadelucro.com.br';
-  return csvContent;
-}
-function downloadCSV(content, filename) {
-  const blob = new Blob(['\ufeff' + content], { type: 'text/csv;charset=utf-8;' });
-  const link = document.createElement('a');
-  const url = URL.createObjectURL(blob);
-  link.setAttribute('href', url);
-  link.setAttribute('download', filename);
-  link.style.visibility = 'hidden';
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
-}
-function submitLead() {
-  const name = document.getElementById('leadName').value.trim();
-  const email = document.getElementById('leadEmail').value.trim();
-  let isValid = true;
-  if (!name || name.length < 3) {
-    document.getElementById('error_leadName').classList.add('show');
-    document.getElementById('leadName').style.borderColor = 'var(--danger)';
-    isValid = false;
-  } else {
-    document.getElementById('error_leadName').classList.remove('show');
-    document.getElementById('leadName').style.borderColor = '';
-  }
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!email || !emailRegex.test(email)) {
-    document.getElementById('error_leadEmail').classList.add('show');
-    document.getElementById('leadEmail').style.borderColor = 'var(--danger)';
-    isValid = false;
-  } else {
-    document.getElementById('error_leadEmail').classList.remove('show');
-    document.getElementById('leadEmail').style.borderColor = '';
-  }
-  if (!isValid) return;
-  const btn = document.getElementById('submitBtn');
-  const btnText = document.getElementById('submitBtnText');
-  btnText.innerHTML = '<span class="loading-spinner"></span>Gerando relatório...';
-  btn.disabled = true;
-  setTimeout(() => {
-    const csvContent = generateCSV(calculationData, name, email);
-    const filename = 'relatorio-airbnb-' + new Date().getTime() + '.csv';
-    downloadCSV(csvContent, filename);
-    btnText.innerHTML = '✓ Relatório Baixado!';
-    setTimeout(() => {
-      closeModal();
-      btnText.textContent = 'Gerar e Baixar Relatório';
-      btn.disabled = false;
-      document.getElementById('leadName').value = '';
-      document.getElementById('leadEmail').value = '';
-      alert('✓ Relatório CSV baixado com sucesso!\n\nObrigado por usar nossa calculadora, ' + name + '!');
-    }, 2000);
-  }, 1500);
-}
-document.getElementById('leadModal').addEventListener('click', function(e) {
-  if (e.target === this) {
-    closeModal();
-  }
-});
 document.querySelectorAll('input').forEach(input => {
   input.addEventListener('keypress', function(e) {
     if (e.key === 'Enter') {
-      const modal = document.getElementById('leadModal');
-      if (modal.classList.contains('show')) {
-        submitLead();
-      } else {
-        calc();
-      }
+      calc();
     }
   });
 });
